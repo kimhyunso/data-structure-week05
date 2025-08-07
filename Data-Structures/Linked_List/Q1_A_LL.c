@@ -66,6 +66,7 @@ int main()
 			printList(&ll);
 			break;
 		case 2:
+			j = ll.size - 1;
 			printf("The value %d was added at index %d\n", i, j);
 			break;
 		case 3:
@@ -88,10 +89,69 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-int insertSortedLL(LinkedList *ll, int item)
-{
+
+int insertSortedLL(LinkedList *ll, int item) {
 	/* add your code here */
+	ListNode* newNode = malloc(sizeof(ListNode));
+	if (newNode == NULL) return -1;
+
+	newNode->item = item;
+	newNode->next = NULL;
+
+	// case 1: head가 null인 경우
+	if (ll->head == NULL) {
+		ll->head = newNode;
+	}
+
+	// case 2: 삽입할 값이 head보다 작거나 같은 경우 -> 맨 앞에 삽입
+	else if (item <= ll->head->item && ll->head->item != item) {
+		newNode->next = ll->head;
+		ll->head = newNode;
+	}
+
+	// case 3: 중간이나 끝에 삽입
+	else {
+		ListNode* prev = ll->head;
+		if (prev->item != item) {
+			while (prev->next != NULL) {
+				if (prev->next->item == item) {
+					return 0;
+				}
+				prev = prev->next;
+			}
+			
+			newNode->next = prev->next;
+			prev->next = newNode;	
+		}
+	}
+
+	// if (ll->size == 0 && ll->head == NULL) { // 링크드 리스트 비어있을 때
+	// 	ll->head = newNode;
+	// } else { // 링크드 리스트 비어있지 않을 때
+	// 	ListNode* currentNode = ll->head;
+
+	// 	if (currentNode->next == NULL) {
+	// 		if (currentNode->item < item) {
+	// 			newNode->next = currentNode;
+	// 			currentNode->next = NULL;
+	// 			ll->head = newNode;
+	// 		} else {
+	// 			currentNode->next = newNode;
+	// 		}
+	// 	} else {
+	// 		// 순회하기
+	// 		while (currentNode->next != NULL && currentNode->next->item < item) {
+	// 			currentNode = currentNode->next;
+	// 		}
+	// 		newNode->next = currentNode->next;
+	// 		currentNode->next = newNode;
+	// 	}
+	// }
+
+	ll->size++;
+	return 0;
 }
+
 
 ///////////////////////////////////////////////////////////////////////////////////
 
