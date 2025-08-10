@@ -101,9 +101,27 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
+// 리눅스 -> 입출력, -- 전체 파일
+
 void alternateMergeLinkedList(LinkedList *ll1, LinkedList *ll2)
 {
     /* add your code here */
+	ListNode* nextNode1 = ll1->head;
+	ListNode* nextNode2 = ll2->head;
+	ListNode* temp;
+
+	for (; nextNode1 != NULL && nextNode2 != NULL; ) {
+		temp = nextNode1->next;   // ll1 다음 노드 저장
+		nextNode1->next = nextNode2; // ll1 뒤에 ll2 삽입
+		nextNode2 = nextNode2->next; // ll2 다음 노드로 이동
+		nextNode1->next->next = temp; // 삽입한 ll2 뒤에 원래 ll1 다음 노드 연결
+		nextNode1 = temp; // ll1 다음 위치로 이동
+		ll1->size++;
+		ll2->size--;
+	}
+
+	// ll2의 남은 노드 갱신
+	ll2->head = nextNode2;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

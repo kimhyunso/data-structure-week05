@@ -130,7 +130,8 @@ int insertSortedLL(LinkedList *ll, int item) {
 	// } else { // 링크드 리스트 비어있지 않을 때
 	// 	ListNode* currentNode = ll->head;
 
-	// 	if (currentNode->next == NULL) {
+	// 	if (currentNode->next == NULL) { // 하나의 노드만 있을 경우
+			
 	// 		if (currentNode->item < item) {
 	// 			newNode->next = currentNode;
 	// 			currentNode->next = NULL;
@@ -138,7 +139,8 @@ int insertSortedLL(LinkedList *ll, int item) {
 	// 		} else {
 	// 			currentNode->next = newNode;
 	// 		}
-	// 	} else {
+
+	// 	} else { // 두 개 이상의 노드가 있을 때
 	// 		// 순회하기
 	// 		while (currentNode->next != NULL && currentNode->next->item < item) {
 	// 			currentNode = currentNode->next;
@@ -226,7 +228,6 @@ int insertNode(LinkedList *ll, int index, int value){
 		ll->size++;
 		return 0;
 	}
-
 
 	// Find the nodes before and at the target position
 	// Create a new node and reconnect the links
