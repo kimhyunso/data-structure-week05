@@ -8,6 +8,7 @@ Purpose: Implementing the required functions for Question 8 */
 
 #include <stdio.h>
 #include <stdlib.h>
+#define max(x, y) (x) > (y) ? (x) : (y)
 
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -102,7 +103,18 @@ int main()
 
 int hasGreatGrandchild(BTNode *node)
 {
-	/* add your code here */
+    if (node == NULL) return 0; // NULL이면 깊이 0
+
+    int leftDepth = hasGreatGrandchild(node->left);
+    int rightDepth = hasGreatGrandchild(node->right);
+
+    int depth = 1 + (leftDepth > rightDepth ? leftDepth : rightDepth);
+
+    if (depth >= 4) {
+        printf("%d ", node->item);
+    }
+
+    return depth;
 }
 
 //////////////////////////////////////////////////////////////////////////////////
