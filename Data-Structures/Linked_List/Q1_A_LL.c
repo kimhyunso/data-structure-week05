@@ -151,7 +151,7 @@ int insertSortedLL(LinkedList *ll, int item) {
 	// }
 
 	ll->size++;
-	return 0;
+	return ll->size - 1;
 }
 
 
